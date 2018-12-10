@@ -3,6 +3,10 @@ Description=Kata Containers Agent
 Documentation=https://github.com/kata-containers/agent
 Wants=kata-containers.target
 
+# virtio-serial is needed unless virtio-vsock is used (see below)
+BindsTo=dev-virtio\x2dports-agent.channel.0.device
+After=dev-virtio\x2dports-agent.channel.0.device
+
 [Service]
 # Send agent output to tty to allow capture debug logs
 # from a VM serial port
