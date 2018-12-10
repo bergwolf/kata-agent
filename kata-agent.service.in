@@ -7,6 +7,10 @@ Wants=kata-containers.target
 BindsTo=dev-virtio\x2dports-agent.channel.0.device
 After=dev-virtio\x2dports-agent.channel.0.device
 
+# The UpdateInterface gRPC call needs the network interface to be up
+BindsTo=sys-subsystem-net-devices-eth0.device
+After=sys-subsystem-net-devices-eth0.device
+
 [Service]
 # Send agent output to tty to allow capture debug logs
 # from a VM serial port
