@@ -1014,7 +1014,7 @@ func realMain() {
 		running:    false,
 		// pivot_root won't work for init, see
 		// Documention/filesystem/ramfs-rootfs-initramfs.txt
-		noPivotRoot:    os.Getpid() == 1,
+		noPivotRoot:    true, // TODO kata-agent started by initramfs systemd also can't pivot_root
 		subreaper:      r,
 		pciDeviceMap:   make(map[string]string),
 		deviceWatchers: make(map[string](chan string)),
