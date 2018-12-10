@@ -18,5 +18,10 @@ StandardOutput=tty
 Type=simple
 ExecStart=@bindir@/@kata-agent@
 LimitNOFILE=infinity
+
+# Make sure virtio-vsock is loaded before the agent attempts to use AF_VSOCK
+# sockets, otherwise the VMware VMCI transport might be loaded instead.
+ExecStartPre=/sbin/modprobe vmw_vsock_virtio_transport
+
 ExecStop=/bin/sync ; /usr/bin/systemctl --force poweroff
 FailureAction=poweroff
