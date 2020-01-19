@@ -21,6 +21,7 @@ import (
 	"github.com/hashicorp/yamux"
 	"github.com/mdlayher/vsock"
 	opentracing "github.com/opentracing/opentracing-go"
+	"github.com/pkg/errors"
 	"golang.org/x/sys/unix"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
@@ -139,7 +140,7 @@ func (c *AgentClient) Close() error {
 func parse(sock string) (string, *url.URL, error) {
 	addr, err := url.Parse(sock)
 	if err != nil {
-		return "", nil, err
+		return "", nil, errors.Wrap(err, "Bad URL")
 	}
 
 	var grpcAddr string
